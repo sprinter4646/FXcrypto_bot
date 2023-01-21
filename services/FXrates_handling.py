@@ -20,13 +20,14 @@ FXrates_db = {'RUB/USD': {'cash': (68.705, 73.715), 'atm': (68.705, 73.715),
                           'account': (2.034, 2.284)}}
 
 
-# функция подготовки вывода курсов валютной пары в телегу
+# функция подготовки вывода сообщения с курсами валютной пары и контактом в телегу
 def FXrates_db_print(fx_rate):
-    output = [f'Валютная пара {fx_rate}\n']
+    output = f'Валютная пара <b>{fx_rate}</b>\n'
     for settle in fx_settle:
-        output.append(f'{LEXICON[settle]}: покупка {FXrates_db[fx_rate][settle][0]} '
-                      f'продажа {FXrates_db[fx_rate][settle][1]}\n')
+        output += f'<b>{LEXICON[settle]}</b>: покупка <b>{ FXrates_db[fx_rate][settle][0]}</b> продажа ' \
+                  f'<b>{FXrates_db[fx_rate][settle][1]}</b>\n'
+    output += f'Для обмена по этим курсам пишите сюда {LEXICON["CONTACT"]}'
     return output
 
 
-print(*FXrates_db_print('RUB/USD'))
+print(FXrates_db_print('RUB/USD'))

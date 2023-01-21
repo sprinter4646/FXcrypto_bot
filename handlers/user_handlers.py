@@ -4,6 +4,7 @@ from aiogram.dispatcher.filters import Text
 from lexicon.lexicon import LEXICON
 from keyboards.user_kb import start_kb, choose_cur
 from services.FXrates_handling import FXrates_db, FXrates_db_print
+from aiogram import types
 
 
 # Этот хэндлер срабатывает на команду /start
@@ -18,7 +19,7 @@ async def process_choose_cur(message: Message):
 
 # Этот хэндлер срабатывает на кнопку с любой валютной парой
 async def process_any_cur_btn(message: Message):
-    await message.answer(f'{FXrates_db_print(message.text)}')
+    await message.answer(f'{FXrates_db_print(message.text)}', parse_mode=types.ParseMode.HTML)
 
 
 # Функция для регистрации хэндлеров в диспетчере. Вызывается в исполняемом файле bot.py
